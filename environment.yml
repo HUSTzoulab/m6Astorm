@@ -1,0 +1,15 @@
+name: m6astorm-env
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - nanopolish
+  - minimap2
+  - samtools
+  - nanofilt
+  - nanostat
+  - pip
+  - pip:
+      - pysam
