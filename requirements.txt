@@ -1,4 +1,0 @@
-nanopolish>=0.13.2
-NanoFilt>=2.8.0
-pysam>=0.21.0
-NanoStat>=1.5.0

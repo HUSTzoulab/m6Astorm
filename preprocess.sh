@@ -53,7 +53,6 @@ nanopolish eventalign --reads "$fastq_dir/U2T.fastq" \
                       --bam "$aligned_dir/filtered.sorted.bam" \
                       --genome "$REF" \
                       --samples --signal-index --scale-events \
-                      --summary "$eventalign_dir/summary.txt" \
                       -t "$threads" \
                       > "$eventalign_dir/eventalign.txt"
 
