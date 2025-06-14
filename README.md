@@ -1,6 +1,9 @@
 m6Astorm: Stoichiometry-preserving and stochasticity-aware identification of m6A from direct RNA sequencing
 
-[toc]
+- [Preprocess](#preprocess)
+- [m6Astorm](#m6astorm)
+  - [Feature extraction](#feature-extraction)
+  - [Predict](#predict)
 
 # Preprocess
 
