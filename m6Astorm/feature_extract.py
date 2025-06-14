@@ -218,7 +218,7 @@ def main():
         'a_max1','a_max2','a_max3','a_max4','a_max5','a_max6','a_max7','a_max8','a_max9'
     ]
     df_result = df_result.reindex(columns=columns_order)
-    out_path = os.path.join(args.out_dir, 'dara_pre.txt')
+    out_path = os.path.join(args.out_dir, 'data_feature.txt')
     df_result.to_csv(out_path, index=False, sep='\t', float_format='%.4f')
     print(f"✅ Done! Final result saved to: {out_path}")
 
