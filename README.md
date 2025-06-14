@@ -29,7 +29,7 @@ pip install torch torchvision torchaudio
 
 ```bash
 python feature_extract.py  --eventalign /path/to/eventalign.txt\
-							--out_dir /path/to/output
+                        --out_dir /path/to/output
 ```
 
 ## Predict
