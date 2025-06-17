@@ -14,9 +14,9 @@ Before runing m6Astorm:
 
    Convert raw `fast5` signal data into nucleotide sequences (FASTQ) using **Guppy**.
 
-   **Input**: `fast5/`
+   - **Input**: `fast5/`
 
-   **Output**: `result/1-basecalled/`
+   - **Output**: `result/1-basecalled/`
 
    ```bash
    guppy_basecaller --flowcell FLO-MIN106 \
