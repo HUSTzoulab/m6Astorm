@@ -5,6 +5,7 @@ m6Astorm: Stoichiometry-preserving and stochasticity-aware identification of m6A
 - [Feature extraction](#feature-extraction)
 - [Predict m6A modification](#predict-m6a-modification)
 - [Test Data](#test-data)
+    - [Runtime Notes](#runtime-notes)
 
 # Preprocess
 
@@ -147,5 +148,11 @@ Outputs:
 
 # Test Data
 
-Example input data is provided in the `test/` directory.
- This dataset can be used to try out the pipeline from **basecalling** to **modification prediction**.
+Example input data is provided in the `test/` directory. 
+
+You can use this dataset to test the pipeline functionality.
+
+### Runtime Notes
+
+Processing the provided example file `test/nanopolish_output_test.txt` takes approximately **15 minutes on CPU** during the feature extraction step.
+For larger datasets, it is recommended to split the input file and submit multiple jobs in parallel to accelerate the process.

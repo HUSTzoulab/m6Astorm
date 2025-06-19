@@ -197,9 +197,9 @@ def main():
 
     print("🧪 Step 4: Scaling and filtering...")
     df_result = scale_and_filter(df)
-    df_result.columns = ['ID', 'Pos', 'motif', 'read_index'] + [f'motif{i}' for i in range(36)] + [
+    df_result.columns = ['config', 'position', 'motif', 'read_index'] + [f'motif{i}' for i in range(36)] + [
         'mean','stdv','length','max','min','medium',
-        'a_max1','a_max2','a_max3','a_max4','a_max5','a_max6','a_max7','a_max8','a_max9',
+        'max_amp1','max_amp2','max_amp3','max_amp4','max_amp5','max_amp6','max_amp7','max_amp8','max_amp9',
         'mean-4', 'mean-3', 'mean-2', 'mean-1', 'mean+1', 'mean+2', 'mean+3', 'mean+4',
         'std-4', 'std-3', 'std-2', 'std-1', 'std+1', 'std+2', 'std+3', 'std+4',
         'length-4', 'length-3', 'length-2', 'length-1', 'length+1', 'length+2', 'length+3', 'length+4',
@@ -208,14 +208,14 @@ def main():
         'medium-4', 'medium-3', 'medium-2', 'medium-1', 'medium+1', 'medium+2', 'medium+3', 'medium+4'
     ]
 
-    columns_order = ['ID', 'Pos', 'motif', 'read_index'] + [f'motif{i}' for i in range(36)] + [
+    columns_order = ['config', 'position', 'motif', 'read_index'] + [f'motif{i}' for i in range(36)] + [
         'mean-4', 'mean-3', 'mean-2', 'mean-1', 'mean', 'mean+1', 'mean+2', 'mean+3', 'mean+4',
         'std-4', 'std-3', 'std-2', 'std-1', 'stdv', 'std+1', 'std+2', 'std+3', 'std+4',
         'length-4', 'length-3', 'length-2', 'length-1', 'length', 'length+1', 'length+2', 'length+3', 'length+4',
         'max-4', 'max-3', 'max-2', 'max-1', 'max', 'max+1', 'max+2', 'max+3', 'max+4',
         'min-4', 'min-3', 'min-2', 'min-1', 'min', 'min+1', 'min+2', 'min+3', 'min+4',
         'medium-4', 'medium-3', 'medium-2', 'medium-1', 'medium', 'medium+1', 'medium+2', 'medium+3', 'medium+4',
-        'a_max1','a_max2','a_max3','a_max4','a_max5','a_max6','a_max7','a_max8','a_max9'
+        'max_amp1','max_amp2','max_amp3','max_amp4','max_amp5','max_amp6','max_amp7','max_amp8','max_amp9'
     ]
     df_result = df_result.reindex(columns=columns_order)
     out_path = os.path.join(args.out_dir, 'data_feature.txt')

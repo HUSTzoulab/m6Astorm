@@ -3,8 +3,8 @@
 # ----------- Configurations ------------
 fast5_dir="fast5"
 basecalled_dir="result/1-basecalled"
-fastq_dir="result/1-fastq"
-aligned_dir="result/2-aligned"
+fastq_dir="result/2-fastq"
+aligned_dir="result/3-aligned"
 eventalign_dir="result/4-eventalign"
 REF="transcriptome fasta"
 flowcell="FLO-MIN106"
