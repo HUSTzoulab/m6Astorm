@@ -88,7 +88,7 @@ Before runing m6Astorm:
                          -t 40 > result/4-eventalign/eventalign.txt
    ```
 
-   ✅ **Final Output**: `result/4-eventalign/eventalign.txt`
+   ✅ **Preprocess Output**: `result/4-eventalign/eventalign.txt`
 
 # Install m6Astorm
 
