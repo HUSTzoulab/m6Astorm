@@ -50,7 +50,7 @@ Before runing m6Astorm:
 
    Align the processed reads to a reference transcriptome using **minimap2** and clean up with **samtools**.
 
-   - **Input**: `result/2-fastq/U2T.fastq`, reference FASTA
+   - **Input**: `result/2-fastq/U2T.fastq`, `ref.fa`
    - **Output**: `result/3-aligned/filtered.sorted.bam`
 
    Steps:
@@ -70,7 +70,7 @@ Before runing m6Astorm:
 
    Generate signal-level alignment using **Nanopolish**.
 
-   - **Input**: `fast5/`, `U2T.fastq`, `filtered.sorted.bam`, reference
+   - **Input**: `fast5/`, `U2T.fastq`, `filtered.sorted.bam`, `ref.fa`
    - **Output**: `result/4-eventalign/eventalign.txt`
 
    Steps:
