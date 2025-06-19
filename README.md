@@ -27,7 +27,7 @@ Before runing m6Astorm:
                     -r --fast5_out
    ```
 
-2. FASTQ Processing
+2. FASTQ processing
 
    Process and clean up FASTQ files before alignment.
 
