@@ -41,7 +41,7 @@ class UnlabelTestDataset(Dataset):
 
     def __getitem__(self, idx):
         row = self.data.iloc[idx]
-        features = row.drop(['ID', 'Pos', 'motif', 'read_index']).values.astype(float)
+        features = row.drop(['config', 'position', 'motif', 'read_index']).values.astype(float)
         return torch.tensor(features.reshape(-1, 9), dtype=torch.float32)
 
 
@@ -97,16 +97,16 @@ def get_site_ratio(model, dataloader, meta, args):
             predictions.extend(preds.cpu().numpy().tolist())
 
     meta = meta.copy()
-    meta['pred'] = np.round(predictions, 4)
+    meta['probability '] = np.round(predictions, 4)
     read_result = meta.copy()
-    meta['coverage'] = meta.groupby(['ID', 'Pos', 'motif'])['ID'].transform('size')
+    meta['coverage'] = meta.groupby(['config', 'position', 'motif'])['config'].transform('size')
     meta = meta[meta['coverage'] >= args.min_coverage]
-    meta['pred_ratio'] = meta.groupby(['ID', 'Pos', 'motif'])['pred'].transform(
+    meta['mod_ratio'] = meta.groupby(['config', 'position', 'motif'])['probability '].transform(
         lambda x: (x >= args.mod_prob_thresh).mean()
     )
-    meta['pred_ratio'] = meta['pred_ratio'].round(4)
+    meta['mod_ratio'] = meta['mod_ratio'].round(4)
 
-    site_result = meta[['ID', 'Pos', 'motif', 'pred_ratio', 'coverage']].drop_duplicates()
+    site_result = meta[['config', 'position', 'motif', 'mod_ratio', 'coverage']].drop_duplicates()
     return read_result, site_result
 
 
@@ -116,8 +116,8 @@ def main():
     os.makedirs(args.out_dir, exist_ok=True)
     checkpoint = torch.load(os.path.join(args.model_dir, 'checkpoint.pth.tar'), weights_only=False)
 
-    data = pd.read_csv(args.data_pre, sep='\t', dtype={'ID': str})
-    meta = data[['ID', 'Pos', 'motif', 'read_index']]
+    data = pd.read_csv(args.data_pre, sep='\t', dtype={'config': str})
+    meta = data[['config', 'position', 'motif', 'read_index']]
 
     dataset = UnlabelTestDataset(data)
     dataloader = DataLoader(dataset, batch_size=128, shuffle=False)
