@@ -56,4 +56,4 @@ nanopolish eventalign --reads "$fastq_dir/U2T.fastq" \
                       -t "$threads" \
                       > "$eventalign_dir/eventalign.txt"
 
-echo "✅ Done! Final output: $eventalign_dir/eventalign.txt"
+echo "✅ Done! The final output of the preprocessing step: $eventalign_dir/eventalign.txt"
