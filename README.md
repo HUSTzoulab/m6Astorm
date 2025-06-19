@@ -154,4 +154,5 @@ You can use this dataset to test the pipeline functionality.
 **Runtime Notes**
 
 Processing the provided example file `test/nanopolish_output_test.txt` takes approximately **15 minutes on CPU** during the feature extraction step.
+
 For larger datasets, it is recommended to split the input file and submit multiple jobs in parallel to accelerate the process.
