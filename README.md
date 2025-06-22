@@ -95,8 +95,8 @@ We recommend using **Conda** for environment management
 
 ```python 
 conda create -n m6astorm python=3.12
-conda install pandas numpy scikit-learn scipy
 conda activate m6astorm
+conda install pandas numpy scikit-learn scipy
 pip install EMD-signal
 pip install torch torchvision torchaudio
 ```
