@@ -94,11 +94,12 @@ Before runing m6Astorm:
 We recommend using **Conda** for environment management
 
 ```python 
-conda create -n m6astorm python=3.12
+conda create -n m6astorm python=3.12.9
 conda activate m6astorm
-conda install pandas numpy scikit-learn scipy
-pip install EMD-signal
-pip install torch torchvision torchaudio
+conda install pandas=2.2.3 numpy=1.26.4 scikit-learn=1.6.1 scipy=1.15.3
+pip install EMD-signal==1.6.4
+pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1
+
 ```
 
 Clone the repository:
