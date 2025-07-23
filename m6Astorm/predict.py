@@ -127,7 +127,6 @@ def get_read_prob(file_path, model, args):
     meta = meta.assign(probability=np.round(all_preds, 4))
     return meta
 
-
 def get_site_ratio(read_results, args):
     read_results.loc[:, 'coverage'] = read_results.groupby(['config', 'position', 'motif'])['config'].transform('size')
     read_results = read_results[read_results['coverage'] >= args.min_coverage].copy()
@@ -143,7 +142,6 @@ def process_file(file_path, checkpoint, args, device):
     model.load_state_dict(checkpoint['state_dict'])
     model.eval()
     return get_read_prob(file_path, model, args)
-
 
 def main():
     args = parse_args()

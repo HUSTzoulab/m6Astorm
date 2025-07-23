@@ -14,8 +14,8 @@ from sklearn.preprocessing import RobustScaler
 from operator import itemgetter
 
 ### ---------------- STEP 1 ----------------
-#1000000
-def parse_eventalign(eventalign_path, chunk_size=10000000, out_dir="./tmp_chunks"):
+
+def parse_eventalign(eventalign_path, chunk_size=2000000, out_dir="./tmp_chunks"):
     os.makedirs(out_dir, exist_ok=True)
 
     def flush_to_file(batch_data, idx):
@@ -70,48 +70,58 @@ def parse_eventalign(eventalign_path, chunk_size=10000000, out_dir="./tmp_chunks
 
 ### ---------------- STEP 2 ----------------
 def process_imf_chunk(chunk_file, output_file):
-    df = pd.read_csv(chunk_file, sep='\t', header=None)
-    rows = df.values.tolist()
-    rows_sorted = sorted(rows, key=itemgetter(3))  # 按 readindex 分组
+    try:
+        df = pd.read_csv(chunk_file, sep='\t', header=None, low_memory=False)
+    except Exception as e:
+        print(f"[ERROR] Failed to load {chunk_file}: {e}")
+        return
+
+    rows = df.itertuples(index=False, name=None)
+    rows_sorted = sorted(rows, key=itemgetter(3))  
 
     output_rows = []
 
-    for key, group in groupby(rows_sorted, key=itemgetter(3)):
+    for read_id, group in groupby(rows_sorted, key=itemgetter(3)):
         group_list = list(group)
-        for i in range(len(group_list)):
-            row = group_list[i]
+        group_len = len(group_list)
+
+        for i, row in enumerate(group_list):
             try:
                 signal = [float(x) for x in row[7].split(',')]
-            except ValueError:
+            except Exception:
                 continue
 
             max_val = np.max(signal)
             min_val = np.min(signal)
             median_val = np.median(signal)
 
-            # 滑窗合并邻近数据
             merged_signal = []
-            for j in range(i - 4, i + 5):
-                if 0 <= j < len(group_list):
+            for j in range(max(0, i - 4), min(group_len, i + 5)):
+                try:
                     merged_signal.extend([float(x) for x in group_list[j][7].split(',')])
-            merged_values = np.array(merged_signal)
+                except Exception:
+                    continue
 
+            merged_values = np.array(merged_signal, dtype=np.float32)
             max_amps = [max_val, min_val, median_val]
 
-            emd = EMD()
-            imfs = emd(merged_values)
-
-            for imf in reversed(imfs):
-                amplitude = np.abs(hilbert(imf))
-                max_amp = np.max(amplitude)
-                max_amps.append(max_amp)
-                if len(max_amps) == 12:
-                    break
-
+            try:
+                emd = EMD()
+                imfs = emd(merged_values)
+                for imf in reversed(imfs):
+                    amplitude = np.abs(hilbert(imf))
+                    max_amp = np.max(amplitude)
+                    max_amps.append(max_amp)
+                    if len(max_amps) == 12:
+                        break
+            except Exception as e:
+                warnings.warn(f"[WARN] EMD failed for row {i} in {chunk_file}: {e}")
+                continue
+           
             if len(max_amps) < 12:
-                max_amps.extend([0] * (12 - len(max_amps)))
-
-            output_rows.append(row[:7] + [f"{float(a):.4f}" for a in max_amps])
+                max_amps.extend([0.0] * (12 - len(max_amps)))
+            
+            output_rows.append(row[:7] + tuple(f"{a:.4f}" for a in max_amps))
 
     pd.DataFrame(output_rows).to_csv(output_file, index=False, sep='\t', header=False)
 
@@ -246,13 +256,8 @@ def run_all(eventalign, out_dir, n_jobs=48):
         for f in chunk_files
     )
 
-    # combined_csv = os.path.join(out_dir, "feature.csv")
-    # pd.concat([
-    #     pd.read_csv(os.path.join(scaled_dir, f), header=None, sep='\t')
-    #     for f in sorted(os.listdir(scaled_dir))
-    # ]).to_csv(combined_csv, index=False, sep='\t', header=False)   
-
     print(f"✅ Done! Data feature saved to: {combined_csv}")
+    
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="m6Astorm full data pre-processing pipeline")
     parser.add_argument('--eventalign', required=True, help='Input eventalign.txt file (TSV)')
