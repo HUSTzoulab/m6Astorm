@@ -114,9 +114,8 @@ cd m6Astorm
 Extract signal-based features from Nanopolish `eventalign.txt` output.
 
 ```bash
-python dataprep.py  --eventalign /path/to/eventalign.txt \
-                    --out_dir /path/to/output \
-                    --n_jobs 24
+python feature_extract.py  --eventalign /path/to/eventalign.txt \
+                    --out_dir /path/to/output 
 ```
 
 - `--eventalign`: Path to the Nanopolish `eventalign.txt` file
@@ -130,7 +129,6 @@ Use the pre-trained model to predict m6A modification from the extracted signal 
 python predict.py --data_pre /path/to/data_feature.txt \
                   --model_dir model \
                   --out_dir result \
-                  --n_jobs 8\
                   --min_coverage 20 \
                   --mod_prob_thresh 0.5
 ```
