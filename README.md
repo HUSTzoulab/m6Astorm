@@ -169,10 +169,10 @@ For larger datasets, it is recommended to split the input file and submit multip
 m6Astorm was trained on the HEK293T cell line, where 80% of sites with coverage ≥20 were used for training and the remaining 20% for testing.
 The HeLa and mESC datasets were used as independent test sets without any training on them.
 
+- Site level: evaluated using Pearson correlation coefficient (PCC) between predicted and GLORI stoichiometries, Recall on GLORI-positive sites, and False Positive Rate (FPR) on GLORI-negative sites.
+- 
 - Read level: evaluated using AUROC and AUPR from per-read classification.
 
-- Site level: evaluated using Pearson correlation coefficient (PCC) between predicted and GLORI stoichiometries, Recall on GLORI-positive sites, and False Positive Rate (FPR) on GLORI-negative sites.
+![site_level](figures/site_level.png)
 
 ![read_level](figures/read_level.png)
-
-![site_level](figures/site_level.png)
