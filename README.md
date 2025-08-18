@@ -1,10 +1,13 @@
-m6Astorm: Stoichiometry-preserving and stochasticity-aware identification of m6A from direct RNA sequencing
 ![method](figures/method.png)
 - [Preprocess](#preprocess)
 - [Install m6Astorm](#install-m6astorm)
 - [Feature extraction](#feature-extraction)
 - [Predict m6A modification](#predict-m6a-modification)
 - [Test Data](#test-data)
+
+**m6Astorm: Stoichiometry-preserving and stochasticity-aware identification of m6A from direct RNA sequencing**
+
+A deep learning framework that enables stoichiometry-preserving and stochasticity-aware identification of m6A modifications at single-molecule and single-nucleotide resolution. m6Astorm is trained on matched direct RNA sequencing (dRNA-seq) and GLORI data from HEK293T cells, using a dual-objective strategy that jointly optimizes the binary cross entropy loss for classifying methylated status at single-molecule level, regularized by a confidence-aware penalty term suppressing low-certainty predictions, and the stoichiometry bias for accurate quantitative at the single-nucleotide level.
 
 # Preprocess
 
