@@ -174,4 +174,5 @@ The HeLa and mESC datasets were used as independent test sets without any traini
 - Site level: evaluated using Pearson correlation coefficient (PCC) between predicted and GLORI stoichiometries, Recall on GLORI-positive sites, and False Positive Rate (FPR) on GLORI-negative sites.
 
 ![read_level](figures/read_level.png)
+
 ![site_level](figures/site_level.png)
